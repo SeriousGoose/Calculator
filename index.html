@@ -183,13 +183,13 @@
             x = x + '0';
         })
         decimal.addEventListener('click', () => {
-            if ( hasDecimal == false  ){
+            if ( hasDecimal == false  ){//checks if current number has decimal place
                 x = x + '.';
             hasDecimal = true}
         })
 
 
-        function addition() {
+        function addition() {//converts string of values from x & y to floats then executes function
             x = parseFloat(x)
             y = parseFloat(y);
             return x + y;
@@ -205,7 +205,7 @@
         function division() {
             x = parseFloat(x)
             y = parseFloat(y);
-            if (x == 0 || y == 0){
+            if (x == 0 || y == 0){ // checks if either variable = 0 before executing function
                 return 0;
             }
             else{
@@ -223,6 +223,7 @@
             x = parseFloat(x)
             x =  x / 100;
             display.innerHTML = x;
+            hasDecimal = true;
         }
 
         let x = '';
@@ -230,13 +231,13 @@
         let operation = ''
         let final = ''
         let hasDecimal = false
-        function modifyText(){
+        function modifyText(){//changes text on calculator display to current or final value
             display.innerHTML = x;
         }
-        function modifyOperation(){
+        function modifyOperation(){//changes text o ncalculato display to current operation
             display.innerHTML = operation;
         }
-        function secondNumber(){
+        function secondNumber(){//following operation or equals sets value of y to either final or x. Freeing x to take the next value to add to operation
             if (final != ''){
                 y = final;
                 x = '';
@@ -249,22 +250,23 @@
             hasDecimal = false;
             }
         }
-        function clearAll(){
+        function clearAll(){//clears all program variables and resets calculator
             x = '';
             y = '';
             final = '';
             operation = '';
             display.innerHTML = 0;
+            hasDecimal = false;
         }
 
-        for (i=0; i < numbers.length; i++){
+        for (i=0; i < numbers.length; i++){//adds event listeners to all buttons to update the text on the calculator display
         numbers[i].addEventListener('click', ()=>{
             modifyText();
         })}
         
          multiply.addEventListener('click', ()=>{
              
-            if (final != ''){
+            if (final != ''){//Allows user to use result of previous calculation
                 if (x != "" && y != ""){
                 operate();
                 operation = '*'
@@ -284,13 +286,13 @@
                     final = ''
                 }
             }
-            else if (x != "" && y != ""){
+            else if (x != "" && y != ""){//tells calculator to operate on current x&y variables before changing operation
                 operate();
                 operation = '*'
                 modifyOperation();
                 display.html = final;
             }
-            else{
+            else{//sets operation
                 operation = '*'
             modifyOperation();
             }
@@ -400,14 +402,7 @@
             percentage();
         })
 
-
-        document.addEventListener('click',()=>{
-            console.log('x='+x)
-            console.log('y='+y)
-            console.log('operation='+operation)
-            console.log('final='+final)
-        })
-        for (i=0; i < operators.length; i++){
+        for (i=0; i < operators.length; i++){//adds event listeners to operaters to trigger secondNumber function
         operators[i].addEventListener('click', ()=>{
             secondNumber();
         })}
@@ -415,7 +410,7 @@
 
         
 
-        function operate(){
+        function operate(){//executes selected function based on operator against current x & y variables
             if (y === '' && x === '' ){
                 display.innerHTML = '0';
             }
@@ -436,8 +431,7 @@
             else if (operation === '-'){
                 final = subtraction();
             }
-            console.log(final)
-            final = Math.round(1000*final)/1000
+            final = Math.round(1000*final)/1000//rounds final result to thousandths place
             display.innerHTML = final;
             
         }
@@ -446,7 +440,7 @@
 
         
 
-        equals.addEventListener('click', ()=>{
+        equals.addEventListener('click', ()=>{//executes operation function and resets variables
             operate();
             x = '';
             y = '';
