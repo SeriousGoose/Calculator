@@ -3,8 +3,9 @@
 
 <head>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
-    <style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+   
+   <style>
         
         html{
             font-family: 'Orbitron', sans-serif;
@@ -46,12 +47,18 @@
         }
 
         .buttons:hover {
-            background-color: red;
-            box-shadow: 12px 12px 7px rgba(0,0,0,0.5);
+            background-color: grey;
+            box-shadow: 6px 6px 3.5px rgba(0,0,0,0.5);
         }
 
         .operators {
             background-color: orange;
+        }
+        .operators:hover{
+            background-color: green;
+        }
+        .erasers:hover{
+            background-color: rgb(224, 11, 11);
         }
 
         #equals{
@@ -126,8 +133,8 @@
         </div>
         <div id="buttons">
 
-            <div id="clear" class="buttons">AC</div>
-            <div id ="backspace" class ="buttons"><-</div>
+            <div id="clear" class="buttons erasers">AC</div>
+            <div id ="backspace" class ="buttons erasers"><-</div>
             <div id="percent" class="buttons">%</div>
             <div id="divide" class="buttons operators">/</div>
             <div id="seven" class="buttons numbers">7</div>
@@ -151,7 +158,7 @@
     </div>
 
     <script>
-       
+        document.title = "Baby's First Calculator"
         
         let display = document.getElementById("input");
         let backspace = document.getElementById('backspace');
@@ -277,6 +284,12 @@
         }
         function secondNumber(){//following operation or equals sets value of y to either final or x. Freeing x to take the next value to add to operation
             if (final != ''){
+                if(x != ''){
+                    final = ''
+                    y=x;
+                    x=''
+                    hasDecimal=false;
+                }
                 y = final;
                 x = '';
                 final = '';
@@ -471,6 +484,13 @@
             }
             final = Math.round(1000*final)/1000//rounds final result to thousandths place
             display.innerHTML = final;
+            if(final === 69){
+                alert("Nice")
+            }
+            else if (final === 5318008){
+                alert("Turn you calculator upside down")
+
+            }
             
         }
             
@@ -485,6 +505,12 @@
             operation = ''
             hasDecimal = false
             
+        })
+        document.addEventListener('click', () => {
+            console.log("x=" + x)
+            console.log("y="+y)
+            console.log("final="+final);
+            console.log('operation='+operation);
         })
         
         
