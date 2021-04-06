@@ -52,7 +52,7 @@
 
             border-radius: 15px;
             grid-template-areas:
-                "clear clear percent divide"
+                "clear back percent divide"
                 "seven eight nine multiply"
                 "four five six subtract"
                 "one two three add"
@@ -97,6 +97,7 @@
         <div id="buttons">
 
             <div id="clear" class="buttons">AC</div>
+            <div id ="backspace" class ="buttons"><-</div>
             <div id="percent" class="buttons">%</div>
             <div id="divide" class="buttons operators">/</div>
             <div id="seven" class="buttons numbers">7</div>
@@ -123,6 +124,7 @@
        
         
         let display = document.getElementById("input");
+        let backspace = document.getElementById('backspace');
         let numbers = document.getElementsByClassName('numbers')
         let buttons = document.getElementsByClassName("buttons")
         let operators = document.getElementsByClassName("operators")
@@ -181,6 +183,12 @@
         })
         zero.addEventListener('click', () => {
             x = x + '0';
+        })
+        backspace.addEventListener('click', () => {//allows user to erase most recent input
+            x = x.split('')
+            let remvoe = x.splice(-1);
+            x = x.join('')
+            display.innerHTML = x;
         })
         decimal.addEventListener('click', () => {
             if ( hasDecimal == false  ){//checks if current number has decimal place
